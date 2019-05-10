@@ -19,12 +19,28 @@ ACatalog::~ACatalog() {
 
 // 初始化搜索参数
 void ACatalog::init_param() {
+	double sf = sin(r_);
+	double cd = cos(dec_);
+	double d;
 
+	if ((spdmin = (int) ((dec - radius + 90.) * MILLISEC)) < 0)            spdmin = 0;
+	if ((spdmax = (int) ((dec + radius + 90.) * MILLISEC)) > MILLISEC180)  spdmax = MILLISEC180 - 1;
+	if (sf < cd) {
+		d = asin(sf / cd) * RtoG;
+		if ((ramin = (int) ((ra - d) * MILLISEC)) < 0)            ramin += MILLISEC360;
+		if ((ramax = (int) ((ra + d) * MILLISEC)) >= MILLISEC360) ramax -= MILLISEC360;
+	}
+	else {
+		ramin = 0;
+		ramax = MILLISEC360 - 1;
+	}
+	if (ramin > ramax) ramax += MILLISEC360;
 }
 
 // 判定参考星是否位于搜索范围内
 bool ACatalog::inner_zone(double ra, double dec) {
-	return false;
+	double v = cos(dec) * cos(dec_) * cos(ra - ra_) + sin(dec) * sin(dec_);
+	return acos(v) <= r_;
 }
 
 // 设置星表根路径
@@ -39,7 +55,7 @@ bool ACatalog::FindStar(double ra, double dec, double r) {
 	r_   = r * D2R;
 	init_param();
 
-	return false;
+	return true;
 }
 
 //////////////////////////////////////////////////////////////////////////////
