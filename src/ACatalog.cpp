@@ -19,22 +19,22 @@ ACatalog::~ACatalog() {
 
 // 初始化搜索参数
 void ACatalog::init_param() {
-	double sf = sin(r_);
-	double cd = cos(dec_);
-	double d;
+//	double sf = sin(r_);
+//	double cd = cos(dec_);
+//	double d;
 
-	if ((spdmin = (int) ((dec - radius + 90.) * MILLISEC)) < 0)            spdmin = 0;
-	if ((spdmax = (int) ((dec + radius + 90.) * MILLISEC)) > MILLISEC180)  spdmax = MILLISEC180 - 1;
-	if (sf < cd) {
-		d = asin(sf / cd) * RtoG;
-		if ((ramin = (int) ((ra - d) * MILLISEC)) < 0)            ramin += MILLISEC360;
-		if ((ramax = (int) ((ra + d) * MILLISEC)) >= MILLISEC360) ramax -= MILLISEC360;
-	}
-	else {
-		ramin = 0;
-		ramax = MILLISEC360 - 1;
-	}
-	if (ramin > ramax) ramax += MILLISEC360;
+//	if ((spdmin = (int) ((dec_ - r_)) < 0) spdmin = 0;
+//			if ((spdmax = (int) ((dec_ + r_ + 90.) * MILLISEC)) > MILLISEC180) spdmax = MILLISEC180 - 1;
+//	if (sf < cd) {
+//		d = asin(sf / cd) * RtoG;
+//		if ((ramin = (int) ((ra - d) * MILLISEC)) < 0)            ramin += MILLISEC360;
+//		if ((ramax = (int) ((ra + d) * MILLISEC)) >= MILLISEC360) ramax -= MILLISEC360;
+//	}
+//	else {
+//		ramin = 0;
+//		ramax = MILLISEC360 - 1;
+//	}
+//	if (ramin > ramax) ramax += MILLISEC360;
 }
 
 // 判定参考星是否位于搜索范围内
