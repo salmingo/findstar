@@ -30,8 +30,8 @@ Kernel configured for up to 4 processors.
 Processor type: x86_64h (Intel x86-64h Haswell)
 Processors active: 0 1 2 3
 Primary memory available: 16.00 gigabytes
-Default processor set: 450 tasks, 1700 threads, 4 processors
-Load average: 1.60, Mach factor: 2.39
+Default processor set: 466 tasks, 1743 threads, 4 processors
+Load average: 1.71, Mach factor: 2.27
 /bin/machine           = unknown
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
@@ -49,147 +49,147 @@ PATH: /opt/X11/bin
 ## Core tests. ##
 ## ----------- ##
 
-configure:2090: checking build system type
-configure:2104: result: x86_64-apple-darwin18.5.0
-configure:2124: checking host system type
-configure:2137: result: x86_64-apple-darwin18.5.0
-configure:2157: checking target system type
-configure:2170: result: x86_64-apple-darwin18.5.0
-configure:2213: checking for a BSD-compatible install
-configure:2281: result: /usr/bin/install -c
-configure:2292: checking whether build environment is sane
-configure:2347: result: yes
-configure:2498: checking for a thread-safe mkdir -p
-configure:2537: result: ../install-sh -c -d
-configure:2544: checking for gawk
-configure:2574: result: no
-configure:2544: checking for mawk
-configure:2574: result: no
-configure:2544: checking for nawk
-configure:2574: result: no
-configure:2544: checking for awk
-configure:2560: found /usr/bin/awk
-configure:2571: result: awk
-configure:2582: checking whether make sets $(MAKE)
-configure:2604: result: yes
-configure:2633: checking whether make supports nested variables
-configure:2650: result: yes
-configure:2835: checking for g++
-configure:2851: found /usr/bin/g++
-configure:2862: result: g++
-configure:2889: checking for C++ compiler version
-configure:2898: g++ --version >&5
+configure:2290: checking build system type
+configure:2304: result: x86_64-apple-darwin18.5.0
+configure:2324: checking host system type
+configure:2337: result: x86_64-apple-darwin18.5.0
+configure:2357: checking target system type
+configure:2370: result: x86_64-apple-darwin18.5.0
+configure:2413: checking for a BSD-compatible install
+configure:2481: result: /usr/bin/install -c
+configure:2492: checking whether build environment is sane
+configure:2547: result: yes
+configure:2698: checking for a thread-safe mkdir -p
+configure:2737: result: ../install-sh -c -d
+configure:2744: checking for gawk
+configure:2774: result: no
+configure:2744: checking for mawk
+configure:2774: result: no
+configure:2744: checking for nawk
+configure:2774: result: no
+configure:2744: checking for awk
+configure:2760: found /usr/bin/awk
+configure:2771: result: awk
+configure:2782: checking whether make sets $(MAKE)
+configure:2804: result: yes
+configure:2833: checking whether make supports nested variables
+configure:2850: result: yes
+configure:3035: checking for g++
+configure:3051: found /usr/bin/g++
+configure:3062: result: g++
+configure:3089: checking for C++ compiler version
+configure:3098: g++ --version >&5
 Apple LLVM version 10.0.1 (clang-1001.0.46.4)
 Target: x86_64-apple-darwin18.5.0
 Thread model: posix
 InstalledDir: /Library/Developer/CommandLineTools/usr/bin
 Configured with: --prefix=/Library/Developer/CommandLineTools/usr --with-gxx-include-dir=/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr/include/c++/4.2.1
-configure:2909: $? = 0
-configure:2898: g++ -v >&5
+configure:3109: $? = 0
+configure:3098: g++ -v >&5
 Configured with: --prefix=/Library/Developer/CommandLineTools/usr --with-gxx-include-dir=/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr/include/c++/4.2.1
 Apple LLVM version 10.0.1 (clang-1001.0.46.4)
 Target: x86_64-apple-darwin18.5.0
 Thread model: posix
 InstalledDir: /Library/Developer/CommandLineTools/usr/bin
-configure:2909: $? = 0
-configure:2898: g++ -V >&5
+configure:3109: $? = 0
+configure:3098: g++ -V >&5
 clang: error: unsupported option '-V -Wno-atomic-implicit-seq-cst'
 clang: error: no input files
-configure:2909: $? = 1
-configure:2898: g++ -qversion >&5
+configure:3109: $? = 1
+configure:3098: g++ -qversion >&5
 clang: error: unknown argument '-qversion', did you mean '--version'?
 clang: error: no input files
-configure:2909: $? = 1
-configure:2929: checking whether the C++ compiler works
-configure:2951: g++    conftest.cpp  >&5
-configure:2955: $? = 0
-configure:3003: result: yes
-configure:3006: checking for C++ compiler default output file name
-configure:3008: result: a.out
-configure:3014: checking for suffix of executables
-configure:3021: g++ -o conftest    conftest.cpp  >&5
-configure:3025: $? = 0
-configure:3047: result: 
-configure:3069: checking whether we are cross compiling
-configure:3077: g++ -o conftest    conftest.cpp  >&5
-configure:3081: $? = 0
-configure:3088: ./conftest
-configure:3092: $? = 0
-configure:3107: result: no
-configure:3112: checking for suffix of object files
-configure:3134: g++ -c   conftest.cpp >&5
-configure:3138: $? = 0
-configure:3159: result: o
-configure:3163: checking whether we are using the GNU C++ compiler
-configure:3182: g++ -c   conftest.cpp >&5
-configure:3182: $? = 0
-configure:3191: result: yes
-configure:3200: checking whether g++ accepts -g
-configure:3220: g++ -c -g  conftest.cpp >&5
-configure:3220: $? = 0
-configure:3261: result: yes
-configure:3287: checking whether make supports the include directive
-configure:3302: make -f confmf.GNU && cat confinc.out
+configure:3109: $? = 1
+configure:3129: checking whether the C++ compiler works
+configure:3151: g++    conftest.cpp  >&5
+configure:3155: $? = 0
+configure:3203: result: yes
+configure:3206: checking for C++ compiler default output file name
+configure:3208: result: a.out
+configure:3214: checking for suffix of executables
+configure:3221: g++ -o conftest    conftest.cpp  >&5
+configure:3225: $? = 0
+configure:3247: result: 
+configure:3269: checking whether we are cross compiling
+configure:3277: g++ -o conftest    conftest.cpp  >&5
+configure:3281: $? = 0
+configure:3288: ./conftest
+configure:3292: $? = 0
+configure:3307: result: no
+configure:3312: checking for suffix of object files
+configure:3334: g++ -c   conftest.cpp >&5
+configure:3338: $? = 0
+configure:3359: result: o
+configure:3363: checking whether we are using the GNU C++ compiler
+configure:3382: g++ -c   conftest.cpp >&5
+configure:3382: $? = 0
+configure:3391: result: yes
+configure:3400: checking whether g++ accepts -g
+configure:3420: g++ -c -g  conftest.cpp >&5
+configure:3420: $? = 0
+configure:3461: result: yes
+configure:3487: checking whether make supports the include directive
+configure:3502: make -f confmf.GNU && cat confinc.out
 this is the am__doit target
-configure:3305: $? = 0
-configure:3324: result: yes (GNU style)
-configure:3349: checking dependency style of g++
-configure:3460: result: none
-configure:3523: checking for gcc
-configure:3539: found /usr/bin/gcc
-configure:3550: result: gcc
-configure:3779: checking for C compiler version
-configure:3788: gcc --version >&5
+configure:3505: $? = 0
+configure:3524: result: yes (GNU style)
+configure:3549: checking dependency style of g++
+configure:3660: result: none
+configure:3723: checking for gcc
+configure:3739: found /usr/bin/gcc
+configure:3750: result: gcc
+configure:3979: checking for C compiler version
+configure:3988: gcc --version >&5
 Apple LLVM version 10.0.1 (clang-1001.0.46.4)
 Target: x86_64-apple-darwin18.5.0
 Thread model: posix
 InstalledDir: /Library/Developer/CommandLineTools/usr/bin
 Configured with: --prefix=/Library/Developer/CommandLineTools/usr --with-gxx-include-dir=/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr/include/c++/4.2.1
-configure:3799: $? = 0
-configure:3788: gcc -v >&5
+configure:3999: $? = 0
+configure:3988: gcc -v >&5
 Configured with: --prefix=/Library/Developer/CommandLineTools/usr --with-gxx-include-dir=/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr/include/c++/4.2.1
 Apple LLVM version 10.0.1 (clang-1001.0.46.4)
 Target: x86_64-apple-darwin18.5.0
 Thread model: posix
 InstalledDir: /Library/Developer/CommandLineTools/usr/bin
-configure:3799: $? = 0
-configure:3788: gcc -V >&5
+configure:3999: $? = 0
+configure:3988: gcc -V >&5
 clang: error: unsupported option '-V -Wno-atomic-implicit-seq-cst'
 clang: error: no input files
-configure:3799: $? = 1
-configure:3788: gcc -qversion >&5
+configure:3999: $? = 1
+configure:3988: gcc -qversion >&5
 clang: error: unknown argument '-qversion', did you mean '--version'?
 clang: error: no input files
-configure:3799: $? = 1
-configure:3803: checking whether we are using the GNU C compiler
-configure:3822: gcc -c   conftest.c >&5
-configure:3822: $? = 0
-configure:3831: result: yes
-configure:3840: checking whether gcc accepts -g
-configure:3860: gcc -c -g  conftest.c >&5
-configure:3860: $? = 0
-configure:3901: result: yes
-configure:3918: checking for gcc option to accept ISO C89
-configure:3981: gcc  -c -g -O2  conftest.c >&5
-configure:3981: $? = 0
-configure:3994: result: none needed
-configure:4019: checking whether gcc understands -c and -o together
-configure:4041: gcc -c conftest.c -o conftest2.o
-configure:4044: $? = 0
-configure:4041: gcc -c conftest.c -o conftest2.o
-configure:4044: $? = 0
-configure:4056: result: yes
-configure:4075: checking dependency style of gcc
-configure:4186: result: none
-configure:4207: checking how to run the C preprocessor
-configure:4238: gcc -E  conftest.c
-configure:4238: $? = 0
-configure:4252: gcc -E  conftest.c
+configure:3999: $? = 1
+configure:4003: checking whether we are using the GNU C compiler
+configure:4022: gcc -c   conftest.c >&5
+configure:4022: $? = 0
+configure:4031: result: yes
+configure:4040: checking whether gcc accepts -g
+configure:4060: gcc -c -g  conftest.c >&5
+configure:4060: $? = 0
+configure:4101: result: yes
+configure:4118: checking for gcc option to accept ISO C89
+configure:4181: gcc  -c -g -O2  conftest.c >&5
+configure:4181: $? = 0
+configure:4194: result: none needed
+configure:4219: checking whether gcc understands -c and -o together
+configure:4241: gcc -c conftest.c -o conftest2.o
+configure:4244: $? = 0
+configure:4241: gcc -c conftest.c -o conftest2.o
+configure:4244: $? = 0
+configure:4256: result: yes
+configure:4275: checking dependency style of gcc
+configure:4386: result: none
+configure:4407: checking how to run the C preprocessor
+configure:4438: gcc -E  conftest.c
+configure:4438: $? = 0
+configure:4452: gcc -E  conftest.c
 conftest.c:11:10: fatal error: 'ac_nonexistent.h' file not found
 #include <ac_nonexistent.h>
          ^~~~~~~~~~~~~~~~~~
 1 error generated.
-configure:4252: $? = 1
+configure:4452: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "findstar"
@@ -202,15 +202,15 @@ configure: failed program was:
 | #define VERSION "1.0"
 | /* end confdefs.h.  */
 | #include <ac_nonexistent.h>
-configure:4277: result: gcc -E
-configure:4297: gcc -E  conftest.c
-configure:4297: $? = 0
-configure:4311: gcc -E  conftest.c
+configure:4477: result: gcc -E
+configure:4497: gcc -E  conftest.c
+configure:4497: $? = 0
+configure:4511: gcc -E  conftest.c
 conftest.c:11:10: fatal error: 'ac_nonexistent.h' file not found
 #include <ac_nonexistent.h>
          ^~~~~~~~~~~~~~~~~~
 1 error generated.
-configure:4311: $? = 1
+configure:4511: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "findstar"
@@ -223,56 +223,56 @@ configure: failed program was:
 | #define VERSION "1.0"
 | /* end confdefs.h.  */
 | #include <ac_nonexistent.h>
-configure:4340: checking for grep that handles long lines and -e
-configure:4398: result: /usr/bin/grep
-configure:4403: checking for egrep
-configure:4465: result: /usr/bin/grep -E
-configure:4470: checking for ANSI C header files
-configure:4490: gcc -c -g -O2  conftest.c >&5
-configure:4490: $? = 0
-configure:4563: gcc -o conftest -g -O2   conftest.c  >&5
-configure:4563: $? = 0
-configure:4563: ./conftest
-configure:4563: $? = 0
-configure:4574: result: yes
-configure:4587: checking for sys/types.h
-configure:4587: gcc -c -g -O2  conftest.c >&5
-configure:4587: $? = 0
-configure:4587: result: yes
-configure:4587: checking for sys/stat.h
-configure:4587: gcc -c -g -O2  conftest.c >&5
-configure:4587: $? = 0
-configure:4587: result: yes
-configure:4587: checking for stdlib.h
-configure:4587: gcc -c -g -O2  conftest.c >&5
-configure:4587: $? = 0
-configure:4587: result: yes
-configure:4587: checking for string.h
-configure:4587: gcc -c -g -O2  conftest.c >&5
-configure:4587: $? = 0
-configure:4587: result: yes
-configure:4587: checking for memory.h
-configure:4587: gcc -c -g -O2  conftest.c >&5
-configure:4587: $? = 0
-configure:4587: result: yes
-configure:4587: checking for strings.h
-configure:4587: gcc -c -g -O2  conftest.c >&5
-configure:4587: $? = 0
-configure:4587: result: yes
-configure:4587: checking for inttypes.h
-configure:4587: gcc -c -g -O2  conftest.c >&5
-configure:4587: $? = 0
-configure:4587: result: yes
-configure:4587: checking for stdint.h
-configure:4587: gcc -c -g -O2  conftest.c >&5
-configure:4587: $? = 0
-configure:4587: result: yes
-configure:4587: checking for unistd.h
-configure:4587: gcc -c -g -O2  conftest.c >&5
-configure:4587: $? = 0
-configure:4587: result: yes
-configure:4599: checking for stdbool.h that conforms to C99
-configure:4666: gcc -c -g -O2  conftest.c >&5
+configure:4540: checking for grep that handles long lines and -e
+configure:4598: result: /usr/bin/grep
+configure:4603: checking for egrep
+configure:4665: result: /usr/bin/grep -E
+configure:4670: checking for ANSI C header files
+configure:4690: gcc -c -g -O2  conftest.c >&5
+configure:4690: $? = 0
+configure:4763: gcc -o conftest -g -O2   conftest.c  >&5
+configure:4763: $? = 0
+configure:4763: ./conftest
+configure:4763: $? = 0
+configure:4774: result: yes
+configure:4787: checking for sys/types.h
+configure:4787: gcc -c -g -O2  conftest.c >&5
+configure:4787: $? = 0
+configure:4787: result: yes
+configure:4787: checking for sys/stat.h
+configure:4787: gcc -c -g -O2  conftest.c >&5
+configure:4787: $? = 0
+configure:4787: result: yes
+configure:4787: checking for stdlib.h
+configure:4787: gcc -c -g -O2  conftest.c >&5
+configure:4787: $? = 0
+configure:4787: result: yes
+configure:4787: checking for string.h
+configure:4787: gcc -c -g -O2  conftest.c >&5
+configure:4787: $? = 0
+configure:4787: result: yes
+configure:4787: checking for memory.h
+configure:4787: gcc -c -g -O2  conftest.c >&5
+configure:4787: $? = 0
+configure:4787: result: yes
+configure:4787: checking for strings.h
+configure:4787: gcc -c -g -O2  conftest.c >&5
+configure:4787: $? = 0
+configure:4787: result: yes
+configure:4787: checking for inttypes.h
+configure:4787: gcc -c -g -O2  conftest.c >&5
+configure:4787: $? = 0
+configure:4787: result: yes
+configure:4787: checking for stdint.h
+configure:4787: gcc -c -g -O2  conftest.c >&5
+configure:4787: $? = 0
+configure:4787: result: yes
+configure:4787: checking for unistd.h
+configure:4787: gcc -c -g -O2  conftest.c >&5
+configure:4787: $? = 0
+configure:4787: result: yes
+configure:4799: checking for stdbool.h that conforms to C99
+configure:4866: gcc -c -g -O2  conftest.c >&5
 conftest.c:70:24: warning: address of 's' will always evaluate to 'true' [-Wpointer-bool-conversion]
              bool e = &s;
                   ~    ^
@@ -307,17 +307,17 @@ conftest.c:75:35: warning: address of array 'o' will always evaluate to 'true' [
 conftest.c:75:40: warning: address of array 'p' will always evaluate to 'true' [-Wpointer-bool-conversion]
                                       ~^
 12 warnings generated.
-configure:4666: $? = 0
-configure:4673: result: yes
-configure:4675: checking for _Bool
-configure:4675: gcc -c -g -O2  conftest.c >&5
-configure:4675: $? = 0
-configure:4675: gcc -c -g -O2  conftest.c >&5
+configure:4866: $? = 0
+configure:4873: result: yes
+configure:4875: checking for _Bool
+configure:4875: gcc -c -g -O2  conftest.c >&5
+configure:4875: $? = 0
+configure:4875: gcc -c -g -O2  conftest.c >&5
 conftest.c:57:20: error: expected expression
 if (sizeof ((_Bool)))
                    ^
 1 error generated.
-configure:4675: $? = 1
+configure:4875: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "findstar"
@@ -380,10 +380,45 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:4675: result: yes
-configure:4834: checking that generated files are newer than configure
-configure:4840: result: done
-configure:4867: creating ./config.status
+configure:4875: result: yes
+configure:4889: checking for memset
+configure:4889: gcc -o conftest -g -O2   conftest.c  >&5
+conftest.c:45:6: warning: incompatible redeclaration of library function 'memset' [-Wincompatible-library-redeclaration]
+char memset ();
+     ^
+conftest.c:45:6: note: 'memset' is a builtin with type 'void *(void *, int, unsigned long)'
+1 warning generated.
+configure:4889: $? = 0
+configure:4889: result: yes
+configure:4889: checking for pow
+configure:4889: gcc -o conftest -g -O2   conftest.c  >&5
+conftest.c:46:6: warning: incompatible redeclaration of library function 'pow' [-Wincompatible-library-redeclaration]
+char pow ();
+     ^
+conftest.c:46:6: note: 'pow' is a builtin with type 'double (double, double)'
+1 warning generated.
+configure:4889: $? = 0
+configure:4889: result: yes
+configure:4889: checking for sqrt
+configure:4889: gcc -o conftest -g -O2   conftest.c  >&5
+conftest.c:47:6: warning: incompatible redeclaration of library function 'sqrt' [-Wincompatible-library-redeclaration]
+char sqrt ();
+     ^
+conftest.c:47:6: note: 'sqrt' is a builtin with type 'double (double)'
+1 warning generated.
+configure:4889: $? = 0
+configure:4889: result: yes
+configure:4900: checking for stdlib.h
+configure:4900: result: yes
+configure:4910: checking for GNU libc compatible malloc
+configure:4934: gcc -o conftest -g -O2   conftest.c  >&5
+configure:4934: $? = 0
+configure:4934: ./conftest
+configure:4934: $? = 0
+configure:4944: result: yes
+configure:5113: checking that generated files are newer than configure
+configure:5119: result: done
+configure:5146: creating ./config.status
 
 ## ---------------------- ##
 ## Running config.status. ##
@@ -400,9 +435,9 @@ generated by GNU Autoconf 2.69.  Invocation command line was
 
 on salvia
 
-config.status:795: creating Makefile
-config.status:795: creating src/Makefile
-config.status:952: executing depfiles commands
+config.status:796: creating Makefile
+config.status:796: creating src/Makefile
+config.status:953: executing depfiles commands
 
 ## ---------------- ##
 ## Cache variables. ##
@@ -435,6 +470,10 @@ ac_cv_env_host_alias_set=
 ac_cv_env_host_alias_value=
 ac_cv_env_target_alias_set=
 ac_cv_env_target_alias_value=
+ac_cv_func_malloc_0_nonnull=yes
+ac_cv_func_memset=yes
+ac_cv_func_pow=yes
+ac_cv_func_sqrt=yes
 ac_cv_header_inttypes_h=yes
 ac_cv_header_memory_h=yes
 ac_cv_header_stdbool_h=yes
@@ -492,7 +531,7 @@ CXX='g++'
 CXXDEPMODE='depmode=none'
 CXXFLAGS='-g -O2'
 CYGPATH_W='echo'
-DEFS='-DPACKAGE_NAME=\"findstar\" -DPACKAGE_TARNAME=\"findstar\" -DPACKAGE_VERSION=\"1.0\" -DPACKAGE_STRING=\"findstar\ 1.0\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"findstar\" -DVERSION=\"1.0\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE__BOOL=1'
+DEFS='-DPACKAGE_NAME=\"findstar\" -DPACKAGE_TARNAME=\"findstar\" -DPACKAGE_VERSION=\"1.0\" -DPACKAGE_STRING=\"findstar\ 1.0\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"findstar\" -DVERSION=\"1.0\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE__BOOL=1 -DHAVE_MEMSET=1 -DHAVE_POW=1 -DHAVE_SQRT=1 -DHAVE_STDLIB_H=1 -DHAVE_MALLOC=1'
 DEPDIR='.deps'
 ECHO_C='\c'
 ECHO_N=''
@@ -602,5 +641,10 @@ target_vendor='apple'
 #define HAVE_STDINT_H 1
 #define HAVE_UNISTD_H 1
 #define HAVE__BOOL 1
+#define HAVE_MEMSET 1
+#define HAVE_POW 1
+#define HAVE_SQRT 1
+#define HAVE_STDLIB_H 1
+#define HAVE_MALLOC 1
 
 configure: exit 0

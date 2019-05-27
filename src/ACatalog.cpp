@@ -1,62 +1,38 @@
 /*
- * @file ACatalog.cpp 天文星表访问共用接口
+ * ACatalog.cpp
+ *
+ *  Created on: 2016年6月13日
+ *      Author: lxm
  */
 
-#include "ADefine.h"
 #include "ACatalog.h"
 
 namespace AstroUtil {
-//////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 ACatalog::ACatalog() {
-	ra_      = dec_     = r_ = 0.0;
-	ra_min_  = ra_max_  = 0.0;
-	dec_min_ = dec_max_ = 0.0;
+	memset(m_pathCat, 0, sizeof(m_pathCat));
+	m_nstars= 0;
+	m_max   = 0;
+}
+
+ACatalog::ACatalog(const char *pathdir) {
+	strcpy(m_pathCat, pathdir);
+	m_nstars= 0;
+	m_max   = 0;
 }
 
 ACatalog::~ACatalog() {
-
 }
 
-// 初始化搜索参数
-void ACatalog::init_param() {
-//	double sf = sin(r_);
-//	double cd = cos(dec_);
-//	double d;
-
-//	if ((spdmin = (int) ((dec_ - r_)) < 0) spdmin = 0;
-//			if ((spdmax = (int) ((dec_ + r_ + 90.) * MILLISEC)) > MILLISEC180) spdmax = MILLISEC180 - 1;
-//	if (sf < cd) {
-//		d = asin(sf / cd) * RtoG;
-//		if ((ramin = (int) ((ra - d) * MILLISEC)) < 0)            ramin += MILLISEC360;
-//		if ((ramax = (int) ((ra + d) * MILLISEC)) >= MILLISEC360) ramax -= MILLISEC360;
-//	}
-//	else {
-//		ramin = 0;
-//		ramax = MILLISEC360 - 1;
-//	}
-//	if (ramin > ramax) ramax += MILLISEC360;
+void ACatalog::SetPathRoot(const char *pathdir) {
+	strcpy(m_pathCat, pathdir);
 }
 
-// 判定参考星是否位于搜索范围内
-bool ACatalog::inner_zone(double ra, double dec) {
-	double v = cos(dec) * cos(dec_) * cos(ra - ra_) + sin(dec) * sin(dec_);
-	return acos(v) <= r_;
-}
-
-// 设置星表根路径
-void ACatalog::SetPath(const char *path) {
-	pathCat_ = path;
-}
-
-// 从星表中查找视场范围内的参考星
-bool ACatalog::FindStar(double ra, double dec, double r) {
-	ra_  = ra * D2R;
-	dec_ = dec * D2R;
-	r_   = r * D2R;
-	init_param();
-
+bool ACatalog::FindStar(double ra0, double dec0, double radius) {
+	if (ra0 < 0 || ra0 > 360 || dec0 < -90 || dec0 > 90 || radius < 0.001)
+		return false;
+	m_csb.new_seek(ra0, dec0, radius / 60.0);	// 计算搜索范围
 	return true;
 }
-
-//////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 } /* namespace AstroUtil */

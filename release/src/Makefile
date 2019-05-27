@@ -101,7 +101,9 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_findstar_OBJECTS = ACatalog.$(OBJEXT) findstar.$(OBJEXT)
+am_findstar_OBJECTS = ACatalog.$(OBJEXT) ACatTycho2.$(OBJEXT) \
+	ACatUCAC4.$(OBJEXT) AMath.$(OBJEXT) ATimeSpace.$(OBJEXT) \
+	findstar.$(OBJEXT)
 findstar_OBJECTS = $(am_findstar_OBJECTS)
 findstar_DEPENDENCIES =
 AM_V_P = $(am__v_P_$(V))
@@ -119,7 +121,10 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I. -I$(srcdir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ./$(DEPDIR)/ACatalog.Po ./$(DEPDIR)/findstar.Po
+am__depfiles_remade = ./$(DEPDIR)/ACatTycho2.Po \
+	./$(DEPDIR)/ACatUCAC4.Po ./$(DEPDIR)/ACatalog.Po \
+	./$(DEPDIR)/AMath.Po ./$(DEPDIR)/ATimeSpace.Po \
+	./$(DEPDIR)/findstar.Po
 am__mv = mv -f
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -178,7 +183,7 @@ CXX = g++
 CXXDEPMODE = depmode=none
 CXXFLAGS = -g -O2
 CYGPATH_W = echo
-DEFS = -DPACKAGE_NAME=\"findstar\" -DPACKAGE_TARNAME=\"findstar\" -DPACKAGE_VERSION=\"1.0\" -DPACKAGE_STRING=\"findstar\ 1.0\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"findstar\" -DVERSION=\"1.0\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE__BOOL=1
+DEFS = -DPACKAGE_NAME=\"findstar\" -DPACKAGE_TARNAME=\"findstar\" -DPACKAGE_VERSION=\"1.0\" -DPACKAGE_STRING=\"findstar\ 1.0\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"findstar\" -DVERSION=\"1.0\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE__BOOL=1 -DHAVE_MEMSET=1 -DHAVE_POW=1 -DHAVE_SQRT=1 -DHAVE_STDLIB_H=1 -DHAVE_MALLOC=1
 DEPDIR = .deps
 ECHO_C = \c
 ECHO_N = 
@@ -265,7 +270,7 @@ target_vendor = apple
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ../..
-findstar_SOURCES = ACatalog.cpp findstar.cpp
+findstar_SOURCES = ACatalog.cpp ACatTycho2.cpp ACatUCAC4.cpp AMath.cpp ATimeSpace.cpp findstar.cpp
 findstar_LDADD = -lm 
 all: all-am
 
@@ -353,7 +358,11 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+#include ./$(DEPDIR)/ACatTycho2.Po # am--include-marker
+#include ./$(DEPDIR)/ACatUCAC4.Po # am--include-marker
 #include ./$(DEPDIR)/ACatalog.Po # am--include-marker
+#include ./$(DEPDIR)/AMath.Po # am--include-marker
+#include ./$(DEPDIR)/ATimeSpace.Po # am--include-marker
 #include ./$(DEPDIR)/findstar.Po # am--include-marker
 
 $(am__depfiles_remade):
@@ -503,7 +512,11 @@ clean: clean-am
 clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
 
 distclean: distclean-am
-		-rm -f ./$(DEPDIR)/ACatalog.Po
+		-rm -f ./$(DEPDIR)/ACatTycho2.Po
+	-rm -f ./$(DEPDIR)/ACatUCAC4.Po
+	-rm -f ./$(DEPDIR)/ACatalog.Po
+	-rm -f ./$(DEPDIR)/AMath.Po
+	-rm -f ./$(DEPDIR)/ATimeSpace.Po
 	-rm -f ./$(DEPDIR)/findstar.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
@@ -550,7 +563,11 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-		-rm -f ./$(DEPDIR)/ACatalog.Po
+		-rm -f ./$(DEPDIR)/ACatTycho2.Po
+	-rm -f ./$(DEPDIR)/ACatUCAC4.Po
+	-rm -f ./$(DEPDIR)/ACatalog.Po
+	-rm -f ./$(DEPDIR)/AMath.Po
+	-rm -f ./$(DEPDIR)/ATimeSpace.Po
 	-rm -f ./$(DEPDIR)/findstar.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
