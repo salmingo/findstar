@@ -42,8 +42,7 @@ int main(int argc, char **argv) {
 		n = strlen(line);
 		line[n - 1] = 0;
 		fprintf(ou, "%s", line);
-		if (n < 100) fprintf(ou, "\n");
-		else {
+		if (n > 100) {
 			pos = 0;
 			token = strtok(line, " ");
 			while (token && pos < 14) {
@@ -55,10 +54,12 @@ int main(int argc, char **argv) {
 			if (ucac4.FindStar(ra0, dec0, 0.01)) {
 				stars = ucac4.GetResult(n);
 				if (n == 1) {
-					fprintf(ou, "  %.1f  %.1f\n", stars[0].apasm[1] * 0.001, stars[0].apasm[3] * 0.001);
+					fprintf(ou, "  %.1f  %.1f", stars[0].apasm[1] * 0.001,
+							stars[0].apasm[3] * 0.001);
 				}
 			}
 		}
+		fprintf(ou, "\n");
 	}
 
 	fclose(in);
