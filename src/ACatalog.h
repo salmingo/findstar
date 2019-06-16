@@ -8,6 +8,7 @@
 #ifndef ACATALOG_H_
 #define ACATALOG_H_
 
+#include <string.h>
 #include "ADefine.h"
 
 namespace AstroUtil {
@@ -38,14 +39,14 @@ public:
 	}
 
 	void new_seek(double ra, double dec, double radius) {
-		double sf = sin(radius * GtoR);
-		double cd = cos(dec * GtoR);
+		double sf = sin(radius * D2R);
+		double cd = cos(dec * D2R);
 		double d;
 
 		if ((spdmin = (int) ((dec - radius + 90.) * MILLISEC)) < 0)            spdmin = 0;
 		if ((spdmax = (int) ((dec + radius + 90.) * MILLISEC)) > MILLISEC180)  spdmax = MILLISEC180 - 1;
 		if (sf < cd) {
-			d = asin(sf / cd) * RtoG;
+			d = asin(sf / cd) * R2D;
 			if ((ramin = (int) ((ra - d) * MILLISEC)) < 0)            ramin += MILLISEC360;
 			if ((ramax = (int) ((ra + d) * MILLISEC)) >= MILLISEC360) ramax -= MILLISEC360;
 		}
