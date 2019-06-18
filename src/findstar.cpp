@@ -259,11 +259,114 @@ bool scan_fits(const string &pathname, ftagvec &vec, ATimeSpace &ats) {
 	return vec.size() >= 5;
 }
 
+#define NDX_X_IMG		0
+#define NDX_Y_IMG		1
+#define NDX_X_WCS		2
+#define NDX_Y_WCS		3
+#define NDX_MAG_INST	4
+#define NDX_CROSS_R		5
+#define NDX_MAG_VIS		6
+#define NDX_MAG_ERR		7
+#define NDX_RA			8
+#define NDX_DEC			9
+#define NDX_COUNT		10
+
+int main(int argc, char **argv) {
+	ATimeSpace ats;
+	ats.SetSite(111 + (43.0 + 15.0 / 60.0) / 60.0,
+			16 + (27.0 + 4.0 / 60.0) / 60.0, 10.0, 8);
+
+	namespace fs = boost::filesystem;
+	ftagvec filevec; // 文件名集合
+	fs::path pathroot = argc < 2 ? "./" : argv[2];
+	if (!scan_fits(pathroot.string(), filevec, ats)) {
+		cout << "require more files to find objects" << endl;
+		return -2;
+	}
+
+	param_wcs wcs;
+	double x0, y0, ra, dec, M;
+
+	char line[200], buff[200];
+	char seps[] = " ";
+	char *token;
+	double azi, ele;
+	int n, p(0), q(0), pos;
+	float value[NDX_COUNT];
+	FILE *output = fopen("output.stars", "w");
+
+	for (ftagvec::iterator it = filevec.begin(); it != filevec.end(); ++it) {
+		cout << (*it).filename << endl;
+
+		fs::path pathfit = pathroot;
+		fs::path pathgood;
+		pathfit /= (*it).filename;
+		pathgood = pathfit;
+		pathgood.replace_extension(fs::path(".new_gaiamatched.gooddata"));
+
+		fs::path pathwcs= pathfit;
+		pathwcs = pathfit;
+		pathwcs.replace_extension(fs::path(".wcs"));
+		if (!wcs.load_wcs(pathwcs.string())) {
+			cout << "could not load WCS" << endl;
+			continue;
+		}
+		x0 = (*it).wimg * 0.5 + 0.5;
+		y0 = (*it).himg * 0.5 + 0.2;
+		wcs.image_to_wcs(x0, y0, ra, dec);
+		ats.Eq2Horizon((*it).lmst - ra * D2R, dec * D2R, azi, ele);
+		M = airmass(D2R * 90.0 - ele);
+		cout << M << endl;
+
+		// 4: 将文件名、时间和文件中提取的候选OT赋值给类AFindPV
+/*		FILE *fpgood = fopen(pathgood.string().c_str(), "r");
+		if (!fpgood) {
+			cout << "failed to open file : " << pathgood.filename().string()
+					<< endl;
+			continue;
+		}
+
+		p = 0;
+		while (!feof(fpgood)) {
+			if (fgets(line, 200, fpgood) == NULL || line[0] == '#')
+				continue;
+			n = strlen(line);
+			line[n - 1] = 0;
+			strcpy(buff, line);
+
+			++p;
+			pos = -1;
+			token = strtok(line, seps);
+			while (token && ++pos < NDX_COUNT) {
+				value[pos] = atof(token);
+				token = strtok(NULL, seps);
+			}
+			ats.Eq2Horizon((*it).lmst - value[NDX_RA] * D2R, value[NDX_DEC] * D2R, azi, ele);
+			fprintf(output,
+					"%7.2f  %7.2f  %9.5f  %9.5f  %5.2f  %5.2f  %5.2f  %5.2f  %6.3f\r\n",
+					value[NDX_X_IMG], value[NDX_Y_IMG],
+					value[NDX_RA], value[NDX_DEC],
+					value[NDX_MAG_INST], value[NDX_MAG_VIS],
+					value[NDX_MAG_INST] - value[NDX_MAG_VIS], ele * R2D,
+					airmass(D2R * 90.0 - ele));
+		}
+
+		fclose(fpgood);
+		q += p;
+		printf("%d of %d stars being selected\n", p, q);
+*/
+	}
+
+	fclose(output);
+	return 0;
+}
+
 /*
  * 读取目录下的所有wcs文件, 从对应的cat文件中挑选参考星, 并计算
  * 参考星的仪器星等、查找对应的UCAC4星表位置和V星等，计算大气质量.
  * 将所有结果输出至文件output.stars
  */
+/*
 int main(int argc, char **argv) {
 	ATimeSpace ats;
 	ats.SetSite(111 + (43.0 + 15.0 / 60.0) / 60.0,
@@ -370,10 +473,11 @@ int main(int argc, char **argv) {
 								ele);
 						mag_inst = 25.0 - 2.5 * log10(flux / (*it).expt);
 						mag_vis = stars[j].apasm[1] * 0.001;
+//						if (mag_vis > 8 && mag_vis < 10 )
 						// # 星表赤经/赤纬/仪器星等/视星等/星等偏差/天顶距/大气质量
 						fprintf(output,
-								"%s  %9.5f  %9.5f  %5.2f  %5.2f  %5.2f  %5.2f  %6.3f\r\n",
-								buff, rac, decc, mag_inst, mag_vis,
+								"%7.2f  %7.2f  %9.5f  %9.5f  %5.2f  %5.2f  %5.2f  %5.2f  %6.3f\r\n",x, y,
+								rac, decc, mag_inst, mag_vis,
 								mag_inst - mag_vis, ele * R2D,
 								airmass(D2R * 90.0 - ele));
 					}
@@ -389,130 +493,7 @@ int main(int argc, char **argv) {
 	fclose(output);
 	return 0;
 }
-
-/*
- * 读取文件, 从星表中查找对应星的坐标并计算偏差
- */
-/*
-int main(int argc, char **argv) {
-	if (argc < 3) {
-		cout << "Usage:" << endl;
-		cout << "\t findstar cat_file out_file [exptime = 1.0]" << endl;
-		return -1;
-	}
-
-	namespace fs = boost::filesystem;
-	char line[300], buff[300];
-	char *token;
-	int pos;
-	double x, y, ra0, dec0, ra, dec, r, rmax, flux, fwhm, expt(1.0);
-	double azi, ele, mjd, lmst, pmra, pmdec, jy;
-	double lgt, lat, alt(10.0);
-	double inst_mag, vis_mag;
-	int n, i, j;
-	ATimeSpace ats;
-	ACatUCAC4 ucac4;
-	ptr_ucac4_elem stars, star;
-	param_wcs wcs;
-	FILE *in = fopen(argv[1], "r");
-	FILE *ou = fopen(argv[2], "w");
-	if (argc == 4)
-		expt = atof(argv[3]);
-
-	fs::path pathwcs = argv[1];
-	pathwcs.replace_extension(fs::path(".wcs"));
-	if (!wcs.load_wcs(pathwcs.string())) {
-		cout << "failed to load WCS from " << pathwcs.string() << endl;
-		return -2;
-	}
-
-	// ...
-	lgt = 111 + (43.0 + 15.0 / 60.0) / 60.0;
-	lat = 16 + (27.0 + 4.0 / 60.0) / 60.0;
-	ats.SetSite(lgt, lat, alt);
-	int wimg, himg;
-	fs::path pathfit = argv[1];
-	pathfit.replace_extension(fs::path(".fit"));
-	resolve_date_obs(pathfit.string(), ats, mjd, lmst, expt, wimg, himg);
-	jy = (mjd - 51544.5) / 365.25;
-	// ...
-
-	ucac4.SetPathRoot("/Users/lxm/Catalogue/UCAC4");
-
-	while (!feof(in)) {
-		if (fgets(line, 300, in) == NULL)
-			continue;
-		n = strlen(line);
-		line[n - 1] = 0;
-		strcpy(buff, line);
-		if (line[0] != '#') {
-			token = strtok(line, " ");
-			x = atof(token);
-			token = strtok(NULL, " ");
-			y = atof(token);
-			token = strtok(NULL, " ");
-			flux = atof(token);
-			token = strtok(NULL, " ");
-			fwhm = atof(token);
-
-			if (flux < 500.0 || fwhm < 1.0)
-				continue;
-
-			wcs.image_to_wcs(x, y, ra0, dec0);
-
-			if (ucac4.FindStar(ra0, dec0, 0.1)) {
-				stars = ucac4.GetResult(n);
-				if (n) {
-					rmax = API;
- ra0 *= D2R;
- dec0 *= D2R;
-					for (i = 0; i < n; ++i) {
-						ra = (double) stars[i].ra / MILLISEC;
-						dec = (double) stars[i].spd / MILLISEC - 90.0;
- r = SphereRange(ra0, dec0, ra * D2R, dec * D2R);
-						if (r < rmax) {
-							rmax = r;
-							j = i;
-						}
-					}
-
-					ra = (double) stars[j].ra / MILLISEC;
-					dec = (double) stars[j].spd / MILLISEC - 90.0;
-//					pmra = stars[j].pmrac * 1E-4 * jy / 3600.0
- //							/ cos(dec * D2R);
-//					pmdec = stars[j].pmdc * 1E-4 * jy;
-//					ra += pmra;
-//					dec += pmdec;
-					if (stars[j].apasm[1] < 20000 && stars[j].apase[1] < 2) {
- ats.Eq2AltAzi(lmst - ra * D2R, dec * D2R, azi, ele);
-						inst_mag = 22.0 - 2.5 * log10(flux / expt);
-						vis_mag = stars[j].apasm[1] * 0.001;
-						// # 星表赤经/赤纬/仪器星等/视星等/星等偏差/天顶距/大气质量
-						fprintf(ou,
-								"%s  %9.5f  %9.5f  %5.2f  %5.2f  %5.2f  %5.2f  %6.3f\r\n",
-								buff, ra, dec, inst_mag, vis_mag,
- inst_mag - vis_mag, 90.0 - ele * R2D,
-								airmass(PI90 - ele));
-//						fprintf(ou,
-//								"%s %9.5f %9.5f %9.5f %9.5f %5.1f %5.1f %5.2f %5.2f\r\n",
- //								buff, ra0 * R2D, dec0 * R2D, ra, dec,
- //								(ra0 * R2D - ra) * 3600.0,
- //								(dec0 * R2D - dec) * 3600.0,
-//								25.0 - 2.5 * log10(flux / expt),
-//								stars[j].apasm[1] * 0.001);
-					}
-				}
-			}
-		}
-	}
-
-	fclose(in);
-	fclose(ou);
-
-	return 0;
-}
- */
-
+*/
 /*
  * 命令行输入参数:
  * <1> 赤经. 可接受的格式: HH.HHHH, HH:MM:SS.SS, HHMMSS.SS
