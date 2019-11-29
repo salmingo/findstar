@@ -24,11 +24,11 @@ namespace AstroUtil {
 #define R2S		1.375098708313975701043156E4	//< 弧度转换为秒
 #define D2AS	3600.0							//< 角度转换为角秒
 #define AS2D	2.777777777777777777777778E-4	//< 角秒转换为角度
-#define MILLISEC		3600000			// 1度对应的毫角秒
-#define MILLISEC5		18000000		// 5度对应的毫角秒
-#define MILLISEC90		324000000		// 90度对应的毫角秒
-#define MILLISEC180		648000000		// 180度对应的毫角秒
-#define MILLISEC360		1296000000		// 360度对应的毫角秒
+#define MILLIAS			3600000			// 1度对应的毫角秒
+#define MILLIAS5		18000000		// 5度对应的毫角秒
+#define MILLIAS90		324000000		// 90度对应的毫角秒
+#define MILLIAS180		648000000		// 180度对应的毫角秒
+#define MILLIAS360		1296000000		// 360度对应的毫角秒
 
 // 时间转换常数
 #define JD2K		2451545.0	//< 历元2000对应的儒略日

@@ -43,18 +43,18 @@ public:
 		double cd = cos(dec * D2R);
 		double d;
 
-		if ((spdmin = (int) ((dec - radius + 90.) * MILLISEC)) < 0)            spdmin = 0;
-		if ((spdmax = (int) ((dec + radius + 90.) * MILLISEC)) > MILLISEC180)  spdmax = MILLISEC180 - 1;
+		if ((spdmin = (int) ((dec - radius + 90.) * MILLIAS)) < 0)           spdmin = 0;
+		if ((spdmax = (int) ((dec + radius + 90.) * MILLIAS)) > MILLIAS180)  spdmax = MILLIAS180 - 1;
 		if (sf < cd) {
 			d = asin(sf / cd) * R2D;
-			if ((ramin = (int) ((ra - d) * MILLISEC)) < 0)            ramin += MILLISEC360;
-			if ((ramax = (int) ((ra + d) * MILLISEC)) >= MILLISEC360) ramax -= MILLISEC360;
+			if ((ramin = (int) ((ra - d) * MILLIAS)) < 0)           ramin += MILLIAS360;
+			if ((ramax = (int) ((ra + d) * MILLIAS)) >= MILLIAS360) ramax -= MILLIAS360;
 		}
 		else {
 			ramin = 0;
-			ramax = MILLISEC360 - 1;
+			ramax = MILLIAS360 - 1;
 		}
-		if (ramin > ramax) ramax += MILLISEC360;
+		if (ramin > ramax) ramax += MILLIAS360;
 	}
 
 	void zone_seek(const int rstep, const int dstep) {

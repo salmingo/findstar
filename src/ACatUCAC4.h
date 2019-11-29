@@ -9,13 +9,13 @@
 #include <string.h>
 #include "ACatalog.h"
 
-#pragma pack(1)
-
 namespace AstroUtil
 {
 ///////////////////////////////////////////////////////////////////////////////
+#define UCAC4_UNIT		78		//< UCAC4每个条目的占用空间, 量纲: 字节
+
 // UCAC4原始星表结构：
-typedef struct ucac4_prime_element {
+typedef struct ucac4_item {
     int	ra;			// 赤经, 量纲: mas; 坐标系: J2000               ***
     int	spd;		// 与南极点距离, 量纲: mas; 坐标系: J2000         ***
     short	magm;	// UCAC拟合星等, 量纲: millimag     -- 仪器星等
@@ -59,25 +59,25 @@ typedef struct ucac4_prime_element {
     int		rn2;		// 沿UCAC2天区运行记录编号
 
 public:
-    ucac4_prime_element& operator=(ucac4_prime_element &other) {
-    	if (this != &other) memcpy(this, &other, sizeof(ucac4_prime_element));
+    ucac4_item& operator=(ucac4_item &other) {
+    	if (this != &other) memcpy(this, &other, sizeof(ucac4_item));
     	return *this;
     }
-}* ptr_ucac4_elem;
+}* ucac4item_ptr;
 ///////////////////////////////////////////////////////////////////////////////
-static const char* cat_ucac4_band[] = {// UCAC4星表波段名称定义
+static const char* ucac4_band[] = {// UCAC4星表波段名称定义
 //   0    1    2    3    4    5    6    7
 	"B", "V", "g", "r", "i", "J", "H", "K"
 };
-const int ucac4_rstep   = MILLISEC / 4;		///< 赤经步长: 0.25度
-const int ucac4_dstep	= MILLISEC / 5;		///< 赤纬步长: 0.2度
-const int ucac4_zrn		= MILLISEC360 / ucac4_rstep;	///< 每个赤纬天区内沿赤经的分区数量
+const int ucac4_rstep   = MILLIAS / 4;		///< 赤经步长: 0.25度
+const int ucac4_dstep	= MILLIAS / 5;		///< 赤纬步长: 0.2度
+const int ucac4_zrn		= MILLIAS360 / ucac4_rstep;	///< 每个赤纬天区内沿赤经的分区数量
 
 struct ucac4_asc {///< UCAC4星表索引
 	unsigned int start;		///< 该天区第一颗星在主数据文件中的位置
 	unsigned int number;	///< 该天区参考星数量
 };
-typedef ucac4_asc* ptr_ucac4asc;
+typedef ucac4_asc* ucac4asc_ptr;
 
 class ACatUCAC4 : public ACatalog {
 public:
@@ -92,7 +92,7 @@ public:
 	 * @return
 	 * 已找到的恒星数据缓存区
 	 */
-	ptr_ucac4_elem GetResult(int &n);
+	ucac4item_ptr GetResult(int &n);
 	/*!
 	 * @brief 查找中心位置附近的恒星
 	 * @param ra0     中心赤经, 量纲: 角度
@@ -110,18 +110,22 @@ protected:
 	 * @return
 	 * 操作成功标记. true: 成功; false: 失败
 	 */
-	bool AllocBuffer(int n);
+	bool alloc_buff(int n);
 	/*!
 	 * @brief 加载星表快速索引
 	 * @return
 	 * 若加载成功返回true, 否则返回false
 	 */
-	bool LoadAsc();
+	bool load_asc();
+	/*!
+	 * @brief 解析星表条目
+	 */
+	void resolve_item(char *buff, ucac4_item &item);
 
 private:
-	ptr_ucac4_elem m_stars;		//< 符合搜索条件的恒星缓存区
-	ptr_ucac4asc m_asc;			//< 快速索引记录
-	int m_nasc;					//< 快速索引记录条目数
+	ucac4item_ptr m_stars;	//< 符合搜索条件的恒星缓存区
+	ucac4asc_ptr m_asc;		//< 快速索引记录
+	int m_nasc;				//< 快速索引记录条目数
 };
 ///////////////////////////////////////////////////////////////////////////////
 }

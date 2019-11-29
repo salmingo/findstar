@@ -90,7 +90,7 @@ bool ACatTycho2::FindStar(double ra0, double dec0, double radius) {
 	vector<tycho2_elem> vecrslt;	// 查找到条目的临时缓存区
 	int n, i;
 
-	m_csb.zone_seek(MILLISEC, MILLISEC);
+	m_csb.zone_seek(MILLIAS, MILLIAS);
 
 	ra0 *= D2R;		// 量纲转换, 为后续工作准备
 	dec0 *= D2R;
@@ -125,8 +125,8 @@ bool ACatTycho2::FindStar(double ra0, double dec0, double radius) {
 			fread(buff, bytes, number, fp);
 			// 遍历参考星, 检查是否符合查找条件
 			for (unsigned int i = 0; i < number; ++i) {
-				ra = (double) buff[i].ra / MILLISEC * D2R;
-				de = ((double) buff[i].spd / MILLISEC - 90) * D2R;
+				ra = (double) buff[i].ra / MILLIAS * D2R;
+				de = ((double) buff[i].spd / MILLIAS - 90) * D2R;
 				double v = SphereRange(ra0, dec0, ra, de);
 				if (v > radius) continue;
 				vecrslt.push_back(*(buff + i));
