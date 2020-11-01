@@ -15,6 +15,8 @@
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include "ADefine.h"
 #include "ACatUCAC4.h"
+#include "ACatTycho2.h"
+#include "ATimeSpace.h"
 
 using namespace std;
 using namespace AstroUtil;
@@ -273,7 +275,7 @@ bool resolve_date_obs(const string &filepath, double &t) {
 	return true;
 }
 
-///*
+/*
 int main(int argc, char **argv) {
 	path pathroot = argc < 2 ? "./" : argv[2];
 	ACatUCAC4 ucac4;
@@ -386,9 +388,9 @@ int main(int argc, char **argv) {
 
 	return 0;
 }
-//*/
+*/
 
-/*
+///*
 int main(int argc, char **argv) {
 	if (argc < 3) {
 		cout << "************************************************************************" << endl;
@@ -403,29 +405,49 @@ int main(int argc, char **argv) {
 
 	double ra0, dec0, radius(1.0);
 	double ra, dec;
+	int n, i;
 	ACatUCAC4 ucac4;
-//	ACatTycho2 tycho2;
+	ACatTycho2 tycho2;
 	ATimeSpace ats;
 
-	ucac4.SetPathRoot("/Users/lxm/Catalogue/UCAC4");
 	ra0  = atof(argv[1]);
 	dec0 = atof(argv[2]);
 	if (argc == 4) radius = atof(argv[3]);
+	printf ("UCAC4 result:\n");
+	ucac4.SetPathRoot("/Users/lxm/Catalogue/UCAC4");
 	if (ucac4.FindStar(ra0, dec0, radius)) {
 		ucac4item_ptr stars, star;
-		int n, i;
 
+		printf ("%10s %10s %6s %6s %6s %6s %5s %5s\n",
+				"RA_J2000", "DEC_J2000", "pm_ra", "pm_dec",
+				"Mag-B", "Mag-V", "Err-B", "Err-V");
 		stars = ucac4.GetResult(n);
 		for (i = 0, star = stars; i < n; ++i, ++star) {
 			ra = (double) star->ra / MILLIAS;
 			dec= (double) star->spd / MILLIAS - 90.0;
-			printf("%10.6f %10.6f %6.1f %6.1f %6.3f %6.3f %5.2f %5.2f\n",
+			printf("%10.6f %10.6f %6.1f %6.1f %6.3f %6.3f %5.2f %5.2f | %10.6f %10.6f\n",
 					ra, dec, star->pmrac * 0.1, star->pmdc * 0.1,
 					star->apasm[0] * 0.001, star->apasm[1] * 0.001,
 					star->apase[0] * 0.01, 	star->apase[1] * 0.01);
 		}
 	}
 
+	printf ("\nTycho2 result:\n");
+	tycho2.SetPathRoot("/Users/lxm/Catalogue/tycho2/tycho2.dat");
+	if (tycho2.FindStar(ra0, dec0, radius)) {
+		ptr_tycho2_elem stars, star;
+
+		printf ("%10s %10s %6s %6s %6s | %10s %10s\n",
+				"RA_J2000", "DEC_J2000", "pm_ra", "pm_dec", "mag");
+		stars = tycho2.GetResult(n);
+		for (i = 0, star = stars; i < n; ++i, ++star) {
+			ra = (double) star->ra / MILLIAS;
+			dec= (double) star->spd / MILLIAS - 90.0;
+			printf("%10.6f %10.6f %6d %6d %6.3f | %10.6f %10.6f\n",
+					ra, dec, star->pmrac, star->pmdc, star->mag * 0.001);
+		}
+	}
+
 	return 0;
 }
- */
+// */

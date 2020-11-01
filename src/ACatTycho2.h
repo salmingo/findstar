@@ -13,13 +13,11 @@
 namespace AstroUtil {
 ///////////////////////////////////////////////////////////////////////////////
 struct tycho2_elem {
-    int	ra;			// 赤经, 量纲: mas; 坐标系: J2000               ***
-    int	spd;		// 与南极点距离, 量纲: mas; 坐标系: J2000         ***
-    short	pmrac;	// RA*cos(DEC)方向的自行, 量纲: 0.1mas/yr        ***
-    short	pmdc;	// DEC方向的自行, 量纲: 0.1mas/yr                ***
-    short   apasm[2];	// 星等, 量纲: millimag
-                        // 0: BT, 无效值: 20000
-                        // 1: VT
+    int	ra;			// 赤经, 量纲: mas; 坐标系: J2000             ***
+    int	spd;		// 与南极点距离, 量纲: mas; 坐标系: J2000      ***
+    short	pmrac;	// RA*cos(DEC)方向的自行, 量纲: mas/yr        ***
+    short	pmdc;	// DEC方向的自行, 量纲: mas/yr                ***
+    short   mag;	// 星等, 量纲: millimag
 
 public:
     tycho2_elem& operator=(tycho2_elem &other) {
@@ -79,6 +77,9 @@ private:
 	ptr_tycho2asc m_asc;			//< 快速索引记录
 	int m_nasc;					//< 快速索引记录条目数
 	int m_offset;				//< 索引和数据在一个文件中, 数据前的字节偏移量
+	int m_nZR;	//< 赤经天区总数
+	int m_nZD;	//< 赤纬天区总数
+	int m_stepR, m_stepD;		//< 星表中赤经赤纬步长, 量纲: 毫角秒/度
 };
 ///////////////////////////////////////////////////////////////////////////////
 } /* namespace AstroUtil */
