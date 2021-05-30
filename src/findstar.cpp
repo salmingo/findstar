@@ -9,8 +9,8 @@
 #include <iostream>
 #include <cstdio>
 #include <string>
-#include <longnam.h>
-#include <fitsio.h>
+#include <cfitsio/longnam.h>
+#include <cfitsio/fitsio.h>
 #include <boost/filesystem.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include "ADefine.h"
